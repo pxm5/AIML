@@ -36,18 +36,18 @@ def trainModel(model:Classifier, epochs:int, opti, crit,  train_loader, valid_lo
 			correct_preds = torch.sum(torch.argmax(output, dim=1) == labels)
 		print(f'running loss: {running_loss} epoch; {i + 1}, ==={(correct_preds/labels.size(0)) * 100}%===')
 
-	if validate:
-		# valid_loader.to(device)
-		model.eval()
-		running_loss = 0.
-		with torch.no_grad():
-			for images, labels in tqdm(valid_loader, desc= f'Validation {i + 1}/{epochs} epoch'):
-				output = model(images).to(device)
-				labels = labels.to(device)
-				loss = crit(output, labels)
-				running_loss += loss.item() / labels.size(0)
-				correct_preds = torch.sum(torch.argmax(output, dim=1) == labels)
-				print(f'running loss: {running_loss} epoch; {i + 1},  ==={(correct_preds/labels.size(0)) * 100}%===')
+		if validate:
+			# valid_loader.to(device)
+			model.eval()
+			running_loss = 0.
+			with torch.no_grad():
+				for images, labels in tqdm(valid_loader, desc= f'Validation {i + 1}/{epochs} epoch'):
+					output = model(images).to(device)
+					labels = labels.to(device)
+					loss = crit(output, labels)
+					running_loss += loss.item() / labels.size(0)
+					correct_preds = torch.sum(torch.argmax(output, dim=1) == labels)
+					print(f'running loss: {running_loss} epoch; {i + 1},  ==={(correct_preds/labels.size(0)) * 100}%===')
 
 	print('TRAINING COMPLETE')
 	
