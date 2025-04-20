@@ -1,2 +1,3 @@
 # AIML
-A compilation of Machine learning projects I have built.
+A compilation of algorithms that I have used and made, ranging from machine learning to other things.
+
